@@ -1,0 +1,31 @@
+{
+  "description": "All dotfiles tracked by this repo. Each entry maps the home-relative path to its purpose.",
+  "files": {
+    ".zshrc": "Zsh config - aliases, functions, machine_connect (m1/m2), vim mode, PATH, completions",
+    ".gitconfig": "Git global config - user, aliases, diff/merge settings",
+    ".config/starship.toml": "Starship cross-shell prompt theme",
+    ".config/ghostty/config": "Ghostty terminal emulator settings",
+    ".config/zellij/config.kdl": "Zellij terminal multiplexer config",
+    ".config/zellij/layouts/default.kdl": "Zellij default layout",
+    ".config/zellij/layouts/htop-all.kdl": "Zellij layout - htop on all machines",
+    ".config/zellij/layouts/tree.kdl": "Zellij layout - file tree sidebar",
+    ".config/zellij/layouts/vtab-new-tab.kdl": "Zellij layout - vtab new tab",
+    ".config/zellij/scripts/move-menu.sh": "Zellij script - move pane menu",
+    ".config/zellij/scripts/pane-menu.sh": "Zellij script - pane management menu",
+    ".config/zellij/scripts/resize-menu.sh": "Zellij script - resize pane menu",
+    ".config/zellij/scripts/scroll-menu.sh": "Zellij script - scroll mode menu",
+    ".config/zellij/scripts/session-menu.sh": "Zellij script - session management menu",
+    ".config/zellij/scripts/tab-menu.sh": "Zellij script - tab management menu",
+    ".claude/CLAUDE.md": "Claude Code global instructions",
+    ".claude/settings.json": "Claude Code settings",
+    ".zprofile": "Zsh login profile - persistent route to London mini network via Unifi gateway",
+    "sudoers.d/route": "Passwordless sudo for /sbin/route - installed to /etc/sudoers.d/route"
+  },
+  "excluded_secrets": [
+    ".env",
+    ".git_credentials",
+    ".bobski",
+    ".config/machines.conf",
+    ".voicemode/voicemode.env"
+  ]
+}
