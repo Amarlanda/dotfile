@@ -48,6 +48,22 @@ YELLOW='\033[0;33m'
 RED='\033[0;31m'
 RESET='\033[0m'
 
+get_mode() {
+  local rel="$1"
+  local mode
+  mode=$(python3 -c "
+import json, sys
+with open('$REPO_DIR/dotfiles.json') as f:
+    data = json.load(f)
+entry = data.get('files', {}).get('$rel', {})
+if isinstance(entry, dict):
+    print(entry.get('mode', '644'))
+else:
+    print('644')
+" 2>/dev/null)
+  echo "${mode:-644}"
+}
+
 link_file() {
   local rel="$1"
   local src="$REPO_DIR/$rel"
@@ -60,7 +76,11 @@ link_file() {
 
   # Already correctly linked
   if [[ -L "$dst" && "$(readlink "$dst")" == "$src" ]]; then
-    echo -e "${GREEN}  OK${RESET} $rel (already linked)"
+    # Ensure permissions on source file
+    local mode
+    mode=$(get_mode "$rel")
+    chmod "$mode" "$src"
+    echo -e "${GREEN}  OK${RESET} $rel (already linked, mode $mode)"
     return
   fi
 
@@ -75,9 +95,12 @@ link_file() {
     echo -e "${YELLOW}BACKUP${RESET} $dst -> ${dst}.bak.pre-symlink"
   fi
 
+  local mode
+  mode=$(get_mode "$rel")
+  chmod "$mode" "$src"
   mkdir -p "$(dirname "$dst")"
   ln -s "$src" "$dst"
-  echo -e "${GREEN}LINKED${RESET} $dst -> $src"
+  echo -e "${GREEN}LINKED${RESET} $dst -> $src (mode $mode)"
 }
 
 echo ""
