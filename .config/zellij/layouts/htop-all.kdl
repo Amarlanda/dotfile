@@ -1,0 +1,18 @@
+layout {
+    pane split_direction="vertical" {
+        pane {
+            name "Local"
+            command "htop"
+        }
+        pane {
+            name "M1 (192.168.0.98)"
+            command "ssh"
+            args "-t" "ans-admin@192.168.0.98" "/opt/homebrew/bin/htop"
+        }
+        pane {
+            name "M2 (192.168.0.99)"
+            command "ssh"
+            args "-t" "ans-admin@192.168.0.99" "/opt/homebrew/bin/htop"
+        }
+    }
+}

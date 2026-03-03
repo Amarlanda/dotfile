@@ -1,0 +1,9 @@
+# Secrets - never commit these
+.env
+.git_credentials
+.bobski
+.config/machines.conf
+.voicemode/voicemode.env
+
+# OS junk
+.DS_Store

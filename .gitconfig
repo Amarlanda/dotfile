@@ -1,0 +1,24 @@
+[user]
+	email = AL@amarlanda.com
+	name = Amar Landa
+	signingKey = 
+[push]
+	autoSetupRemote = true
+[core]
+	excludesfile = /Users/bob/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[gpg]
+	format = openpgp
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[gpg "ssh"]
+	program = 
+	allowedSignersFile = 

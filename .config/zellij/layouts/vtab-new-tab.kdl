@@ -1,0 +1,66 @@
+// Tab layout for new tabs created at runtime.
+// Zellij's template serialization drops `children`, so we use
+// an explicit layout file instead of the session's stored template.
+
+layout {
+    pane size=1 borderless=true {
+        plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+            _allow_exec_host_cmd true
+            format_left   "#[fg=#D8A657,bold] {session}"
+            format_center ""
+            format_right  "{command_git_branch} {pipe_status}"
+            format_space  ""
+
+            border_enabled  "false"
+            border_char     "─"
+            border_format   "#[fg=#504945]{char}"
+            border_position "bottom"
+
+            command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+            command_git_branch_format      "#[fg=#A9B665] {stdout} "
+            command_git_branch_interval    "10"
+            command_git_branch_rendermode  "static"
+
+            pipe_status_format "#[fg=#DDC7A1,bg=#3C3836,bold] {output} #[bg=default]"
+            pipe_status_rendermode "dynamic"
+        }
+    }
+    pane split_direction="vertical" {
+        pane
+        pane size="25%" borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zellij-navbar.wasm" {
+                _allow_exec_host_cmd true
+            }
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+            _allow_exec_host_cmd true
+            format_left   "{mode} {tabs}"
+            format_center ""
+            format_right  "{datetime} {notifications}"
+            format_space  ""
+
+            border_enabled  "false"
+            border_char     "─"
+            border_format   "#[fg=#504945]{char}"
+            border_position "top"
+
+            hide_frame_for_single_pane "false"
+
+            mode_normal  "#[bg=#7DAEA3] "
+            mode_tmux    "#[bg=#E78A4E] "
+
+            tab_normal   "#[fg=#7C6F64] {name} "
+            tab_active   "#[fg=#D8A657,bold] {name} "
+
+            notifications_format_unread "#[fg=#D4BE98,bg=#3C3836] {message} "
+            notifications_format_no_notifications ""
+            notifications_show_interval "10"
+
+            datetime        "#[fg=#A89984,bold] {format} "
+            datetime_format "%H:%M"
+            datetime_timezone "America/New_York"
+        }
+    }
+}
