@@ -106,8 +106,8 @@ function set_path() {
   export GOBIN="$GOPATH/bin"
   export PATH="$PATH:$GOBIN:$HOME/.daml/bin"
 
-  # a-cli (shell command reference with tab completion)
-  export PATH="$HOME/a-cli:$PATH"
+  # zx - zshrc explorer CLI
+  export PATH="$HOME/git/pers/zx/bin:$PATH"
 
   # Bun JavaScript runtime
   export BUN_INSTALL="$HOME/.bun"
@@ -234,13 +234,11 @@ function gk-cli() {
 
 # --------------------------------------------------------------------------
 # 9. Misc utility functions
-#    - a       : Go CLI binary at ~/a-cli/ (with tab completion)
 #    - yourcli : launches custom Rust/Go binary from personal projects
 #    - h [N]   : shows the last N history entries with timestamps (default 20)
 #    - f [N]   : fuzzy-find directories up to depth N (default 1)
 # --------------------------------------------------------------------------
 
-# "a" is now a Go CLI binary at ~/a-cli/a (with tab completion)
 function yourcli() {
   "$HOME/git/pers/cv_rust/backend/go-bin/go-bin"
 }
@@ -516,7 +514,7 @@ function define_aliases() {
   alias python='python3'                            # Default to python3
   alias pip='pip3'                                  # Default to pip3
   alias sfdx='sf'                                   # Salesforce CLI rename
-  alias ll="lsd -ltha"                              # Pretty ls with lsd
+  alias l="lsd -ltha"                               # Pretty ls with lsd
   # Print a coloured "moving from X to Y" message, then cd up one level
   alias ..='noglob echo "${BOLD}moving from${RESET} ${YELLOW}$(pwd)${RESET} to ${GREEN}$(dirname "$(pwd)")${RESET}"; cd ..'
   alias cls="reset; clear"                          # Full terminal reset
@@ -595,8 +593,8 @@ function setup_completions() {
   autoload -Uz compinit
   compinit
 
-  # a-cli completions
-  source <(a completion zsh)
+  # zx completions
+  source <(zx completion zsh)
 }
 
 # --------------------------------------------------------------------------
@@ -744,7 +742,16 @@ alias xx="cd ~/git/pers/zellji-websrvr-manager ; ZELLIJ_LOG_LEVEL=debug zellij -
 
 # London network CLI
 export PATH="$HOME/git/pers/service-registry-discovey/bin:$PATH"
-alias l=ldnctl
+alias ldn=ldnctl
 
 # London network - Mac Mini hostnames (also in /etc/hosts on each node)
 # mini-1 = 10.0.0.11, mini-2 = 10.0.0.22, mini-3 = 10.0.0.33
+
+# add Pulumi to the PATH
+export PATH=$PATH:/Users/bob/.pulumi/bin
+
+# Portainer SSH tunnel to mini-1
+function portainer() {
+  ssh -f -N -L 9444:localhost:9444 amar@10.0.0.11
+  echo "${GREEN}Portainer tunnel active → https://localhost:9444${RESET}"
+}
