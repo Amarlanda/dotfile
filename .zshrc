@@ -106,8 +106,8 @@ function set_path() {
   export GOBIN="$GOPATH/bin"
   export PATH="$PATH:$GOBIN:$HOME/.daml/bin"
 
-  # zx - zshrc explorer CLI
-  export PATH="$HOME/git/pers/zx/bin:$PATH"
+  # zshrc-explorer CLI
+  export PATH="$HOME/git/pers/zshrc-explorer/bin:$PATH"
 
   # Bun JavaScript runtime
   export BUN_INSTALL="$HOME/.bun"
